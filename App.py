@@ -3,7 +3,6 @@ from flask_cors import CORS
 from flask_restful import Api
 import secrets
 import os
-import RestApi
 
 UPLOAD_FOLDER = 'uploads'
 OUT_FOLDER = 'out'
@@ -11,9 +10,15 @@ ALLOWED_EXTENSIONS = {'wav'}
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-api.add_resource(RestApi, '/api')  # Route_Default
+
+
+@app.route('/api', methods=['GET'])
+def test_api():
+    return {'status': 'Server working..!',
+            'response_code': 200,
+            'Application': 'Research 2020-159-speech_recognition_system',
+            'version': '1.0.0'}
 
 
 @app.route('/api/uploadFile', methods=['GET', 'POST'])
@@ -44,3 +49,7 @@ def upload_file():
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+if __name__ == '__main__':
+    app.run(port='5002')

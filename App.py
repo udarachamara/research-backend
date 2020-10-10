@@ -29,6 +29,7 @@ def upload_file():
         filename = f_token + '_' + file.filename
         if file and allowed_file(file.filename):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['OUT_FOLDER'], filename))
             return {'status': 'Upload working..!',
                     'data': filename,
                     'response_code': 1001,

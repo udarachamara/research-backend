@@ -11,6 +11,7 @@ app = Flask(__name__)
 CORS(app)
 api = Api(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['OUT_FOLDER'] = OUT_FOLDER
 
 
 @app.route('/api', methods=['GET'])

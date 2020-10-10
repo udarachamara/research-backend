@@ -51,8 +51,8 @@ def upload_file():
 
 @app.route('/api/processNoise/<filename>', methods=['GET'])
 def process_noise(filename):
-    file_path = OUT_FOLDER+"/" + filename
-    return send_file(file_path, as_attachment=True, attachment_filename='')
+    file_path = os.path.join(app.config['OUT_FOLDER']+"/" + filename)
+    return send_file(file_path)
     # return {'status': 'Upload working..!',
     #         'data': "",
     #         'response_code': 1001,

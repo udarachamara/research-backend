@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, request
+from flask import Flask, send_from_directory, request, send_file
 from flask_cors import CORS
 from flask_restful import Api
 import secrets
@@ -47,9 +47,20 @@ def upload_file():
                 'version': '1.0.0'}
 
 
+@app.route('/api/processNoise/<filename>', methods=['GET'])
+def process_noise(filename):
+    file_path = OUT_FOLDER+"/" + filename
+    return send_file(file_path, as_attachment=True, attachment_filename='')
+    # return {'status': 'Upload working..!',
+    #         'data': "",
+    #         'response_code': 1001,
+    #         'Application': 'Research 2020-159-speech_recognition_system',
+    #         'version': '1.0.0'}
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 if __name__ == '__main__':
-    app.run(port='5002')
+    app.run(host='0.0.0.0',port='5000')
